@@ -10,7 +10,7 @@ export class Validator {
         let items = this.values.items;
 
         if(this.values.onInit){
-            this.executeAction(this.values.onInit);    
+            this.executeAction(this.values.onInit);
         };
 
         items.forEach(item => {
@@ -18,9 +18,9 @@ export class Validator {
             this.response.push(this.validate);
             this.validate = [];
         });
-        
+
         if(this.values.onEnd){
-            this.executeAction(this.values.onEnd);    
+            this.executeAction(this.values.onEnd);
         };
 
         this.checker === 0 ? this.response.valid = true : this.response.valid = false
@@ -36,7 +36,7 @@ export class Validator {
         for (let i = 0; i < types.length; i++) {
             switch (types[i]) {
                 case 'empty':
-                    value !== '' ?  this.validate.empty = 'Empty Okay' : this.displayErrors(user_input, 'empty', i); 
+                    value !== '' ?  this.validate.empty = 'Empty Okay' : this.displayErrors(user_input, 'empty', i);
                     break;
                 case 'email':
                     value === 'utyemma@gmail.com' ? this.validate.email = 'Email Okay' : this.displayErrors(user_input, 'email', i);
@@ -46,32 +46,31 @@ export class Validator {
                     break;
                 default:
                     break;
-            }            
+            }
         }
     }
 
-    displayErrors(item, type, i){   
+    displayErrors(item, type, i){
         switch (type) {
             case 'empty':
-                this.values.message.empty ? this.validate[i] = this.values.message.empty : this.validate[i] = item.name+' is Required';        
+                this.values.message.empty ? this.validate[i] = this.values.message.empty : this.validate[i] = item.name+' is Required';
                 break;
             case 'email':
-                this.values.message.email  ? this.validate[i] = this.values.message.email : this.validate[i] = item.name+' Must be an Email';        
+                this.values.message.email  ? this.validate[i] = this.values.message.email : this.validate[i] = item.name+' Must be an Email';
                 break;
 
             case 'password':
-                this.values.message.password  ? this.validate[i] = this.values.message.password : this.validate[i] = item.name+' Must be a password';        
+                this.values.message.password  ? this.validate[i] = this.values.message.password : this.validate[i] = item.name+' Must be a password';
                 break;
-        
+
             default:
                 break;
         }
         this.checker = 1;
-        
     }
 
     executeAction(item){
-        item();   
+        item();
     }
 
     styleErrorMessage(message, type){
